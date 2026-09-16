@@ -14,7 +14,7 @@ build, with whatever secrets that job can read. A commit SHA cannot be moved.
 Point PINNED at any public repo. It reads every workflow, tells you what share of borrowed code is
 actually pinned, and hands you the exact replacement line.
 
-**Live: https://pinned-nine.vercel.app**
+**Live: https://pinned-swart.vercel.app**
 
 ---
 
